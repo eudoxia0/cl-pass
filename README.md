@@ -1,6 +1,8 @@
 # cl-pass
 
-cl-pass is a password hashing and verification library.
+cl-pass is a password hashing and verification library. The source code was
+originally part of [hermetic](https://github.com/eudoxia0/hermetic), and was
+factored out to allow other libraries to use it.
 
 # Usage
 
