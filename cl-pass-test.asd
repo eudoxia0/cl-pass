@@ -6,6 +6,7 @@
 (defsystem cl-pass-test
   :author "Fernando Borretti"
   :license "MIT"
+  :description "Tests for cl-pass"
   :depends-on (:cl-pass :fiveam)
   :components ((:module "t"
                 :components
