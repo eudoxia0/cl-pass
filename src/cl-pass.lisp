@@ -8,9 +8,17 @@
 (defparameter +known-digests+
   (list :pbkdf2-sha1 :pbkdf2-sha256 :pbkdf2-sha512))
 
+(defparameter *package-random-state* nil
+  "Holds the random state used for generation of random numbers.")
+
 (defun salt (&optional (size 16))
   "Generate a salt of a given size."
-  (ironclad:make-random-salt size))
+  (unless *package-random-state*
+    (setf *package-random-state* (make-random-state t)))
+  (let* ((*random-state* (make-random-state *package-random-state*))
+         (salt (ironclad:make-random-salt size)))
+    (setf *package-random-state* (make-random-state nil))
+    salt))
 
 (defun pbkdf2 (password salt digest iterations)
   (ironclad:pbkdf2-hash-password-to-combined-string password
