@@ -1,5 +1,8 @@
 # cl-pass
 
+[![Build Status](https://travis-ci.org/eudoxia0/cl-pass.svg?branch=master)](https://travis-ci.org/eudoxia0/cl-pass)
+[![Quicklisp badge](http://quickdocs.org/badge/cl-pass.svg)](http://quickdocs.org/cl-pass)
+
 cl-pass is a password hashing and verification library. The source code was
 originally part of [hermetic](https://github.com/eudoxia0/hermetic), and was
 factored out to allow other libraries to use it.
