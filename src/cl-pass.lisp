@@ -63,8 +63,8 @@ iterations, salt and algorithm used to produce it."
 algorithm, number of iterations) in PASSWORD-HASH, so you don't have to pass
 anything else."
   (let ((parsed (parse-password-hash password-hash)))
-    (equal password-hash
-           (hash pass
-                 :type (getf parsed :digest)
-                 :salt (ironclad:hex-string-to-byte-array (getf parsed :salt))
-                 :iterations (getf parsed :iterations)))))
+    (string= password-hash
+             (hash pass
+                   :type (getf parsed :digest)
+                   :salt (ironclad:hex-string-to-byte-array (getf parsed :salt))
+                   :iterations (getf parsed :iterations)))))
