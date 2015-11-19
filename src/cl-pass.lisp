@@ -62,6 +62,7 @@ iterations, salt and algorithm used to produce it."
   "Verify that PASS hashes to PASSWORD-HASH. Extracts the parameters (Salt,
 algorithm, number of iterations) in PASSWORD-HASH, so you don't have to pass
 anything else."
+  (declare (type string pass password-hash))
   (let ((parsed (parse-password-hash password-hash)))
     (string= password-hash
              (hash pass
