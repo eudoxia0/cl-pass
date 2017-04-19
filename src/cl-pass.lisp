@@ -44,6 +44,18 @@
               type
               +known-digests+)))))
 
+(defun constant-string= (a b)
+  "Custom string equality function to defeat timing attacks."
+  (if (= (length a) (length b))
+      (let ((result 0))
+        (loop for char-a across a
+              for char-b across b
+              do
+          (setf result (logior result (logxor (char-code char-a)
+                                              (char-code char-b)))))
+        (= result 0))
+      nil))
+
 (defun parse-password-hash (password-hash)
   "Parse a combined string into a list containing the digest; and the number of
 iterations, salt and algorithm used to produce it."
@@ -64,8 +76,8 @@ algorithm, number of iterations) in PASSWORD-HASH, so you don't have to pass
 anything else."
   (declare (type string pass password-hash))
   (let ((parsed (parse-password-hash password-hash)))
-    (string= password-hash
-             (hash pass
-                   :type (getf parsed :digest)
-                   :salt (ironclad:hex-string-to-byte-array (getf parsed :salt))
-                   :iterations (getf parsed :iterations)))))
+    (constant-string= password-hash
+                      (hash pass
+                            :type (getf parsed :digest)
+                            :salt (ironclad:hex-string-to-byte-array (getf parsed :salt))
+                            :iterations (getf parsed :iterations)))))
