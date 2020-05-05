@@ -1,7 +1,8 @@
 (in-package :cl-user)
 (defpackage cl-pass
   (:use :cl)
-  (:export :hash
+  (:export :salt
+           :hash
            :check-password))
 (in-package :cl-pass)
 
